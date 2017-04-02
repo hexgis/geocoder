@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 
 from .views import (
-	QueryOpenStreetMap
+	QueryOpenStreetMapSearch, QueryOpenStreetMapReverse
 	)
 
 urlpatterns = [
 
-    url(r'^$', QueryOpenStreetMap.as_view(), name="osm"),
-
+    url(r'search/?', QueryOpenStreetMapSearch.as_view(), name="osm-search"),
+    url(r'reverse/?', QueryOpenStreetMapReverse.as_view(), name="osm-reverse"),
 ]
