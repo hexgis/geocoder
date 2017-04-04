@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import requests
 import sys
 
@@ -13,7 +14,7 @@ NOMINATIM_URL_REVERSE = "http://nominatim.openstreetmap.org/reverse"
 REQUEST_ERROR_DATA = {
         "data":'API indisponível no momento', 
         "status_code": 404
-    }
+}
 
 
 def error_response_exception(exc):
@@ -143,12 +144,20 @@ class QueryOpenStreetMapSearch(APIView):
     """
 
     def post(self, request, **kwargs):
-        query = request_search_data(self.request.data)
+        end = self.request.data.get('endereco')
+
+        if end is None:
+            return error_response_exception('endereco is missing')
+
+        query = request_search_data(query=endereco)
         return Response(query['data'], status=query['status_code'])
 
     def get(self, request, format=None):
         endereco = request.GET.get('endereco', None)
         scg = request.GET.get('scg', None) or 1
+
+        if endereco is None:
+            error_response_exception('endereco is missing')
 
         query = request_search_data(query=endereco, scg=scg)
         return Response(query['data'], status=query['status_code'])
@@ -181,9 +190,6 @@ class QueryOpenStreetMapReverse(APIView):
     def get(self, request, format=None):
         lat = request.GET.get('lat')
         lon = request.GET.get('lon')
-
-        print("lat is {}".format(lat))
-        print("lon is {}".format(lon))
 
         if lat is None:
             return error_response_exception('latitude is missing')
