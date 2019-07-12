@@ -134,9 +134,16 @@ REST_FRAMEWORK = {
 
 # Cache  Configuration
 ## https://docs.djangoproject.com/en/2.2/topics/cache/
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': 'unix:/tmp/memcached.sock',
     }
 }
+
+# Nominatim url configuration for search and reverse
+## https://nominatim.openstreetmap.org/
+
+NOMINATIM_URL = "http://nominatim.openstreetmap.org/search"
+NOMINATIM_URL_REVERSE = "http://nominatim.openstreetmap.org/reverse"
