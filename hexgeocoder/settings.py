@@ -122,18 +122,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Django Rest Framework 
-## Render Class definition
+# Django Rest Framework config
+## https://www.django-rest-framework.org/
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     )
 }
-## End Render Class definition
-# END Django Rest Framework 
 
-
+# Cache  Configuration
+## https://docs.djangoproject.com/en/2.2/topics/cache/
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
