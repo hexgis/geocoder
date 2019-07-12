@@ -63,10 +63,10 @@ class QueryOpenStreetMapReverse(APIView):
         lon = self.request.data.get('lon')
 
         if lat is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter lat is missing"}
             return Response(response, status=404)
         if lon is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter lon is missing"}
             return Response(response, status=404)
 
         query = request_reverse_data(lat=lat, lon=lon)
@@ -77,10 +77,10 @@ class QueryOpenStreetMapReverse(APIView):
         lon = request.GET.get('lon')
 
         if lat is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter lat is missing"}
             return Response(response, status=404)
         if lon is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter lon is missing"}
             return Response(response, status=404)
 
         scg = request.GET.get('scg', None) or 1
