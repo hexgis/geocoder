@@ -3,6 +3,7 @@ chardet==3.0.4
 Django==2.2.3
 djangorestframework==3.9.4
 idna==2.8
+python-memcached==1.59
 pytz==2019.1
 requests==2.22.0
 sqlparse==0.3.0
