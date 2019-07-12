@@ -5,7 +5,7 @@ from .views import (
 	QueryOpenStreetMapSearch, QueryOpenStreetMapReverse
 	)
 
-app_name = 'osm'
+app_name = 'openstreetmap'
 
 urlpatterns = [
     path('search/', QueryOpenStreetMapSearch.as_view(), name="osm-search"),
