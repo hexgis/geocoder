@@ -15,31 +15,31 @@ class QueryOpenStreetMapSearch(APIView):
     View utilizada para busca de locais a partir do endereço
     
     Argumentos:
-        @endereco (str): endereco de busca na API nominatim
+        @location (str): location de busca na API nominatim
         @scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
         
-    Return:
+    Returns:
         @reponse (object): response com código de status e
             resposta da aplicação.
     """
 
     def post(self, request, **kwargs):
-        q = self.request.data.get('endereco')
+        q = self.request.data.get('location')
         if q is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter location is missing"}
             return Response(response, status=404)
 
         query = request_search_data(query=q)
         return Response(query['data'], status=query['status_code'])
 
     def get(self, request, format=None):
-        q = request.GET.get('endereco', None)
+        q = request.GET.get('location', None)
         scg = request.GET.get('scg', None) or 1
 
         if q is None:
-            response = {"data": "Parameter endereco is missing"}
+            response = {"data": "Parameter location is missing"}
             return Response(response, status=404)
 
         query = request_search_data(query=q, scg=scg)
@@ -49,13 +49,14 @@ class QueryOpenStreetMapSearch(APIView):
 class QueryOpenStreetMapReverse(APIView):
 
     """
-    View utilizada para busca de locais a partir do endereço
+    View utilizada para geocodificação reversa utilizando nominatim
 
-    lat: latitude 
-    lon: longitude
-    scg: sistema de coordenadas geográficas
-        1 -> lon, lat
-        2 -> lat, lon
+    Argumentos:
+        @lat (float): ponto de latitude
+        @lon (float): ponto de longitude
+        @scg (int): Ordem de coordenadas geograficas para a aplicação
+            1 -> lon, lat
+            2 -> lat, lon
     """
 
     def post(self, request, **kwargs):
