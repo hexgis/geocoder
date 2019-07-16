@@ -1,10 +1,9 @@
 # Geocoder
-A fork from https://github.com/hexgis/geocoder.git
 
 A very simple django application that uses [nominatim](https://nominatim.openstreetmap.org/) engine to  to search locations into [OpenStreetMap](https://www.openstreetmap.org/).
 
 ```
-Please, check politicies for nominatim application and enable your own cache politicy
+Please, check privacy policies for nominatim application and enable your own cache data policies.
 ```
 
 ### Available urls:
