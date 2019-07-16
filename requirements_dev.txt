@@ -1,4 +1,4 @@
-pip install -r requirements.txt
+-r requirements.txt
 
 ipython>=7.6.1
 
