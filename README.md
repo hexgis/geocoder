@@ -1,6 +1,6 @@
 # Geocoder
 
-A very simple django application that uses [nominatim](https://nominatim.openstreetmap.org/) engine to  to search locations into [OpenStreetMap](https://www.openstreetmap.org/).
+A very simple django application that uses [nominatim](https://nominatim.openstreetmap.org/) engine to search locations in [OpenStreetMap](https://www.openstreetmap.org/).
 
 ```
 Please, check privacy policies for nominatim application and enable your own cache data policies.
