@@ -122,17 +122,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Django Rest Framework 
-## Render Class definition
+# Django Rest Framework config
+## https://www.django-rest-framework.org/
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-        # 'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
     )
 }
-## End Render Class definition
-# END Django Rest Framework 
 
+# Cache  Configuration
+## https://docs.djangoproject.com/en/2.2/topics/cache/
 
 CACHES = {
     'default': {
@@ -140,3 +141,9 @@ CACHES = {
         'LOCATION': 'unix:/tmp/memcached.sock',
     }
 }
+
+# Nominatim url configuration for search and reverse
+## https://nominatim.openstreetmap.org/
+
+NOMINATIM_URL = "http://nominatim.openstreetmap.org/search"
+NOMINATIM_URL_REVERSE = "http://nominatim.openstreetmap.org/reverse"
