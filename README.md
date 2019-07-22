@@ -41,3 +41,15 @@ $ python manage.py runserver
 ```
 
 Now, by default, the server will be available in http://localhost:8000 that will be possible to see both __search__ and __reverse__ urls;
+
+
+### Using Docker
+
+For docker development, we add a Dockerfile that will help with the applications and containers for development.
+The default configurations is available in `docker-compose.yaml` file and can be changed according to your development preferences.
+
+Running docker-compose
+
+```bash
+$ docker-compose up
+```
