@@ -8,9 +8,39 @@ Please, check politicies for nominatim application and enable your own cache pol
 ```
 
 ### Available urls:
+
+The search and reverse urls accept `GET` and `POST` methods, and will search data in the Nominatim API.
+
+```bash
+/search?location
+
+/reverse?lat=-12&lon=-53
 ```
-search/location=youlocation
-reverse/lat=-12&lon=-52
+
+Examples:
+`curl -X GET localhost:8080/search?location=MyCity`
+or 
+`curl -X POST localhost:8080/search -d location=MyCity`
+
+The response will be:
+```json
+{
+  "type":"FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { 
+        "type":"Point",
+        "coordinates": [
+           10.5525370239731, 52.9689393
+        ]
+      },
+      "properties": {
+        "name":"mycity, Friedensreich-Hundertwasser-Platz, Veerßen, Uelzen, Niedersachsen, 29525, Deutschland"
+      }
+    }
+  ]
+}
 ```
 
 ### Development
