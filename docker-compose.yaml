@@ -14,5 +14,3 @@ services:
     command: python manage.py test
     volumes:
       - .:/code
-    ports:
-      - "8000:8000"
