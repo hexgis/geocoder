@@ -13,14 +13,14 @@ def transform_request(json, scg=1, search_type="search"):
     """
     Função para transformar requisição em geojson
 
-    Argumentos:
-        @json (object): dado em formato json para parse
-        @scg (int): Ordem de coordenadas geograficas para a aplicação
+    Args:
+        json (object): dado em formato json para parse
+        scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
 
     Returns:
-        @featureCollection (object): coleção de dados em formato geojson
+        featureCollection (object): coleção de dados em formato geojson
     """
     if search_type == "search":
 
@@ -80,12 +80,12 @@ def request_search_data(query, scg=1, url=settings.NOMINATIM_URL):
     """
     Função para requisição de dados da api de busca do nominatim 
 
-    Argumentos:
-        @query: Pesquisa realizada em api Nominatim
-        @scg (int): Ordem de coordenadas geograficas para a aplicação
+    Args:
+        query: Pesquisa realizada em api Nominatim
+        scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
-        @url (str): string de pesquisa do nominatim
+        url (str): string de pesquisa do nominatim
     """
     params = {}
     params["q"] = query
@@ -105,13 +105,13 @@ def request_search_data(query, scg=1, url=settings.NOMINATIM_URL):
 def request_reverse_data(lat, lon, scg=1, url=settings.NOMINATIM_URL_REVERSE):
     """ 
     Função para requisição de dados para a API reversa do nominatim
-    Argumentos:
-        @lat (float): latitude
-        @lon (float): longitude
-        @scg (int): Ordem de coordenadas geograficas para a aplicação
+    Args:
+        lat (float): latitude
+        lon (float): longitude
+        scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
-        @url (str): string de pesquisa do nominatim
+        url (str): string de pesquisa do nominatim
     """
     params = {}
     params["lat"] = float(lat)

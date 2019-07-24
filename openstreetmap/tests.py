@@ -19,31 +19,30 @@ class TestGeocodingViews(TestCase):
 	def test_url_get_search_response_error(self):
 		response = self.client.get(self.search_url)
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter location is missing")
+		self.assertEqual(response.data['location'], "Parameter is missing")
 
 	def test_url_get_reverse_response_error(self):
 		response = self.client.get(self.reverse_url)
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter lat is missing")
+		self.assertEqual(response.data['lat'], "Parameter is missing")
 
 		response = self.client.get(self.reverse_url, data={"lat": 10})
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter lon is missing")
+		self.assertEqual(response.data['lon'], "Parameter is missing")
 
 	def test_url_post_search_response_error(self):
 		response = self.client.post(self.search_url)
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter location is missing")
+		self.assertEqual(response.data['location'], "Parameter is missing")
 
 	def test_url_post_reverse_response_error(self):
 		response = self.client.post(self.reverse_url)
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter lat is missing")
+		self.assertEqual(response.data['lat'], "Parameter is missing")
 
 		response = self.client.post(self.reverse_url, data={"lat": 10})
 		self.assertEqual(response.status_code, 404)
-		self.assertEqual(response.data['data'], "Parameter lon is missing")
-
+		self.assertEqual(response.data['lon'], "Parameter is missing")
 
 	def tearDown(self):
 		pass
