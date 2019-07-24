@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  webgeocoder-dev:
+  web:
     image: app
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -9,9 +9,3 @@ services:
       - .:/code
     ports:
       - "8080:8000"
-  test:
-    image: app
-    build: .
-    command: python manage.py test
-    volumes:
-      - .:/code
