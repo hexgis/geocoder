@@ -14,21 +14,21 @@ class QueryOpenStreetMapSearch(APIView):
     """
     View utilizada para busca de locais a partir do endereço
     
-    Argumentos:
-        @location (str): location de busca na API nominatim
-        @scg (int): Ordem de coordenadas geograficas para a aplicação
+    Args:
+        location (str): location de busca na API nominatim
+        scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
         
     Returns:
-        @reponse (object): response com código de status e
+        reponse (object): response com código de status e
             resposta da aplicação.
     """
 
     def post(self, request, **kwargs):
         q = self.request.data.get('location')
         if q is None:
-            response = {"data": "Parameter location is missing"}
+            response = {"location": "Parameter is missing"}
             return Response(response, status=404)
 
         query = request_search_data(query=q)
@@ -39,7 +39,7 @@ class QueryOpenStreetMapSearch(APIView):
         scg = request.GET.get('scg', None) or 1
 
         if q is None:
-            response = {"data": "Parameter location is missing"}
+            response = {"location": "Parameter is missing"}
             return Response(response, status=404)
 
         query = request_search_data(query=q, scg=scg)
@@ -51,12 +51,16 @@ class QueryOpenStreetMapReverse(APIView):
     """
     View utilizada para geocodificação reversa utilizando nominatim
 
-    Argumentos:
-        @lat (float): ponto de latitude
-        @lon (float): ponto de longitude
-        @scg (int): Ordem de coordenadas geograficas para a aplicação
+    Args:
+        lat (float): ponto de latitude
+        lon (float): ponto de longitude
+        scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
+
+    Returns:
+        reponse (object): response com código de status e
+            resposta da aplicação.
     """
 
     def post(self, request, **kwargs):
@@ -64,10 +68,10 @@ class QueryOpenStreetMapReverse(APIView):
         lon = self.request.data.get('lon')
 
         if lat is None:
-            response = {"data": "Parameter lat is missing"}
+            response = {"lat": "Parameter is missing"}
             return Response(response, status=404)
         if lon is None:
-            response = {"data": "Parameter lon is missing"}
+            response = {"lon": "Parameter is missing"}
             return Response(response, status=404)
 
         query = request_reverse_data(lat=lat, lon=lon)
@@ -78,10 +82,10 @@ class QueryOpenStreetMapReverse(APIView):
         lon = request.GET.get('lon')
 
         if lat is None:
-            response = {"data": "Parameter lat is missing"}
+            response = {"lat": "Parameter is missing"}
             return Response(response, status=404)
         if lon is None:
-            response = {"data": "Parameter lon is missing"}
+            response = {"lon": "Parameter is missing"}
             return Response(response, status=404)
 
         scg = request.GET.get('scg', None) or 1
