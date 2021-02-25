@@ -26,22 +26,21 @@
           <input class="button" type="submit" value="search"><a href="/search?location={{ current_location }}"></a></input>
         </form>
           <div class="space"></div>
-        <form class="lat-lon" id="lat-lon" action="/search/" method="post">
-          <input onkeyup="submit();" class="lat-lon-inp"
-            id="latitude"
+        <form class="lat-lon" id="lat-lon" action="/reverse/" method="post">
+          <input class="lat-lon-inp"
+            id="lat"
             type="text"
-            name="latitude"
+            name="lat"
             value="{{ current_latitude }}"
             placeholder="enter latitude"
           />
-          <input onkeyup="submit();" class="lat-lon-inp"
-            id="longitude"
+          <input class="lat-lon-inp"
+            id="lon"
             type="text"
-            name="longitude"
+            name="lon"
             value="{{ current_longitude }}"
             placeholder="enter longitude"
           />
-          <!-- <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input> -->
         <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input>
         </form>
     </div>
