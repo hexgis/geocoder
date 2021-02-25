@@ -7,19 +7,25 @@ from rest_framework import authentication, permissions
 from rest_framework.response import Response
 from rest_framework import status
 
+from django.shortcuts import render
+
 from .utils import request_search_data, request_reverse_data
+
+
+def index(request):
+    return render(request, 'index.html')
 
 
 class QueryOpenStreetMapSearch(APIView):
     """
     View utilizada para busca de locais a partir do endereço
-    
+
     Args:
         location (str): location de busca na API nominatim
         scg (int): Ordem de coordenadas geograficas para a aplicação
             1 -> lon, lat
             2 -> lat, lon
-        
+
     Returns:
         reponse (object): response com código de status e
             resposta da aplicação.
