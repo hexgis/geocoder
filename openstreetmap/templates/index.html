@@ -62,7 +62,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script>
-    let form = document.getElementById('search'); // selecting the form
+    let search = document.getElementById('search'); // selecting the form
     let reverse = document.getElementById('reverse'); // selecting the form
     var mymap = L.map('mapid').setView([51.508, -0.11], 13);
 
@@ -94,9 +94,8 @@
       return list;
     }
 
-
     
-    form.addEventListener('submit', function(event) {
+    search.addEventListener('submit', function(event) {
         event.preventDefault()
     
         let data = new FormData();
@@ -150,6 +149,41 @@
           
         }) 
     })
+
+    // function callReverse still to be fixed
+
+    // function callReverse(latitude, longitude) {
+    //   let data = new FormData();
+        
+    //     data.append("lat", latitude)
+    //     data.append("lon", longitude)
+    //     data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+        
+    //     axios.post('reverse/', data)
+    //     .then(res => {
+    //       console.log(res)
+    //       var features = res.data.features
+    //       var output = features[0].properties.name
+    //       // Display list with results
+    //       document.getElementById('display-results').innerHTML=output;
+    //   }
+    //     )}
+
+
+    function onMapClick(e) {
+      var position =  e.latlng;
+      var shorterPosition = String(position).slice(7, -1)
+      var splitString = shorterPosition.split(', ')
+      console.log(splitString)
+      // get lat and long from click
+      var latitude = splitString[0]
+      var longitude = splitString[0]
+      document.getElementById('display-results').innerHTML=splitString;
+      // callReverse(latitude, longitude)
+
+    }
+
+    mymap.on('click', onMapClick);
 
 
     </script>
