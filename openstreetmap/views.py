@@ -8,12 +8,22 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from django.shortcuts import render
+from django.http import JsonResponse
 
 from .utils import request_search_data, request_reverse_data
 
 
 def index(request):
     return render(request, 'index.html')
+
+
+def showResults(request):
+    if request.method == 'POST':
+        location = request.POST.get('location')
+        Results.objects.create(
+            location=location,
+        )
+    return JsonResponse({"status": 'Success'})
 
 
 class QueryOpenStreetMapSearch(APIView):
