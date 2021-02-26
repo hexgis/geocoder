@@ -20,8 +20,12 @@ def index(request):
 def showResults(request):
     if request.method == 'POST':
         location = request.POST.get('location')
+        lat = request.POST.get('lat')
+        lon = request.POST.get('lon')
         Results.objects.create(
             location=location,
+            lat=lat,
+            lon=lon,
         )
     return JsonResponse({"status": 'Success'})
 

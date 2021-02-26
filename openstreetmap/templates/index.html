@@ -15,7 +15,7 @@
     <div class="main-row">
     <div class="header"><h1>GEOCODER</h1></div>
     <div class="options">
-        <form class="location" id="form">
+        <form class="location" id="search">
           <input class="text-inp"
             id="location"
             type="text"
@@ -26,7 +26,7 @@
           <input class="button" type="submit" value="search"><a href="/search?location={{ current_location }}"></a></input>
         </form>
           <div class="space"></div>
-        <form class="lat-lon" id="lat-lon" action="/reverse/" method="post">
+        <form class="lat-lon" id="reverse">
           <input class="lat-lon-inp"
             id="lat"
             type="text"
@@ -43,30 +43,30 @@
           />
         <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input>
         </form>
-        <div id="searched-location"></div>
         <div id="display-results"></div>
     </div>
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script>
-    let form = document.getElementById('form'); // selecting the form
+    let form = document.getElementById('search'); // selecting the form
+    let reverse = document.getElementById('reverse'); // selecting the form
 
     function makeUL(json) {
-      // Create the list element:
+      // Create list element
       var list = document.createElement('ul');
 
       for(var i = 0; i < Object.keys(json).length; i++) {
-          // Create the list item:
+          // Create list item
           var item = document.createElement('li');
 
-          // Set its contents:
+          // Set contents
           item.appendChild(document.createTextNode(Object.values(json)[i]));
 
-          // Add it to the list:
+          // Add to the list
           list.appendChild(item);
 
       }
-      // Finally, return the constructed list:
+      // Return list
       return list;
     }
 
@@ -77,8 +77,11 @@
     
         let data = new FormData();
         
-        data.append("location", document.getElementById('location').value)   
+        data.append("location", document.getElementById('location').value)
+        data.append("lat", document.getElementById('lat').value)
+        data.append("lon", document.getElementById('lon').value)
         data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+        
         
         axios.post('search/', data)
         .then(res => {
@@ -88,12 +91,33 @@
             names.push(features[i].properties.name)
           }
           console.log(names)
-          document.getElementById('searched-location').append(document.getElementById('location').value)
           // Display list with results:
           document.getElementById('display-results').appendChild(makeUL(names));
           
         })
+        
     })
+
+    reverse.addEventListener('submit', function(event) {
+        event.preventDefault()
+    
+        let data = new FormData();
+        
+        data.append("lat", document.getElementById('lat').value)
+        data.append("lon", document.getElementById('lon').value)
+        data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+        
+        axios.post('reverse/', data)
+        .then(res => {
+          var features = res.data.features
+          var output = features[0].properties.name
+          // Display list with results
+          document.getElementById('display-results').innerHTML=output;
+          
+        }) 
+    })
+
+
     </script>
     
   </body>
