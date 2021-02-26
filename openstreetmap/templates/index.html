@@ -115,10 +115,8 @@
             names.push(features[i].properties.name)
             var latitude = features[i].geometry.coordinates[0];
             var longitude = features[i].geometry.coordinates[1];
-            var marker = L.marker([latitude, longitude]).addTo(mymap);
-            var marker = L.marker([latitude, longitude]).addTo(mymap);
+            var marker = L.marker([longitude, latitude]).addTo(mymap);
           }
-          console.log(names)
           // Display list with results:
           document.getElementById('display-results').appendChild(makeUL(names));
           
@@ -137,6 +135,7 @@
         
         axios.post('reverse/', data)
         .then(res => {
+          console.log(res)
           var features = res.data.features
           var output = features[0].properties.name
           // Display list with results
@@ -145,7 +144,7 @@
           var latitude = features[0].geometry.coordinates[0]
           var longitude = features[0].geometry.coordinates[1]
           // Add marker to map
-          var marker = L.marker([latitude, longitude]).addTo(mymap);
+          var marker = L.marker([longitude, latitude]).addTo(mymap);
           // Set view not working
           mymap = L.map('mapid').setView([latitude, longitude]);
           
