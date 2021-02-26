@@ -23,7 +23,7 @@ label {
   font-family: 'Montserrat', sans-serif;
 }
 
-.options {
+.section1 {
   display: flex;
   justify-content: center;
   align-items: left;
@@ -73,12 +73,17 @@ label {
   height: 3rem;
 }
 
-#searched-location {
-  font-family: 'Montserrat', sans-serif;
-  color: #d62828;
-}
-
 #display-results {
   font-family: 'Montserrat', sans-serif;
   color: white;
+}
+
+.section2 {
+  display: flex;
+  justify-content: center;
+}
+
+#mapid {
+  height: 25rem;
+  width: 100%;
 }

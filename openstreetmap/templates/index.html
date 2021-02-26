@@ -9,12 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/styles.css?{% now "U" %}"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
     <script src="{% static '/js/script.js' %}" type="text/javascript"></script>
   </head>
   <body>
     <div class="main-row">
     <div class="header"><h1>GEOCODER</h1></div>
-    <div class="options">
+    <div class="section1">
         <form class="location" id="search">
           <input class="text-inp"
             id="location"
@@ -46,10 +52,28 @@
         <div id="display-results"></div>
     </div>
   </div>
+  <div class="section2">
+    <div id="mapid"></div>
+  </div>
+  
+  <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
   <script>
     let form = document.getElementById('search'); // selecting the form
     let reverse = document.getElementById('reverse'); // selecting the form
+    var mymap = L.map('mapid').setView([51.508, -0.11], 13);
+
+  
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox/satellite-v9',
+      accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+
 
     function makeUL(json) {
       // Create list element
@@ -89,6 +113,10 @@
           var features = res.data.features
           for(var i=0; i<features.length;i++) {
             names.push(features[i].properties.name)
+            var latitude = features[i].geometry.coordinates[0];
+            var longitude = features[i].geometry.coordinates[1];
+            var marker = L.marker([latitude, longitude]).addTo(mymap);
+            var marker = L.marker([latitude, longitude]).addTo(mymap);
           }
           console.log(names)
           // Display list with results:
@@ -113,6 +141,13 @@
           var output = features[0].properties.name
           // Display list with results
           document.getElementById('display-results').innerHTML=output;
+
+          var latitude = features[0].geometry.coordinates[0]
+          var longitude = features[0].geometry.coordinates[1]
+          // Add marker to map
+          var marker = L.marker([latitude, longitude]).addTo(mymap);
+          // Set view not working
+          mymap = L.map('mapid').setView([latitude, longitude]);
           
         }) 
     })
