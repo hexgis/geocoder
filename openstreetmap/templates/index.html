@@ -112,15 +112,26 @@
           var names = []
           var features = res.data.features
           for(var i=0; i<features.length;i++) {
-            names.push(features[i].properties.name)
             var latitude = features[i].geometry.coordinates[0];
             var longitude = features[i].geometry.coordinates[1];
+            names.push([features[i].properties.name])
             var marker = L.marker([longitude, latitude]).addTo(mymap);
-          }
+            console.log(names)
+            // Center map showing all LatLngs
+            mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true });  
+          } 
+
           // Display list with results:
-          document.getElementById('display-results').appendChild(makeUL(names));
+
+          if (document.getElementById('display-results').innerHTML !== "") {
+            document.getElementById('display-results').innerHTML = "";
+            document.getElementById('display-results').appendChild(makeUL(names));
+          } else {
+            document.getElementById('display-results').appendChild(makeUL(names));
+          }
           
         })
+
         
     })
 
@@ -146,7 +157,7 @@
           // Add marker to map
           var marker = L.marker([longitude, latitude]).addTo(mymap);
           // Set view not working
-          mymap = L.map('mapid').setView([latitude, longitude]);
+          mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true }); 
           
         }) 
     })
@@ -178,11 +189,11 @@
         latitude = features[0].geometry.coordinates[0]
         longitude = features[0].geometry.coordinates[1]
         // Add marker to map
+        
         var marker = L.marker([longitude, latitude]).addTo(mymap);
         // Set view not working
-        mymap = L.map('mapid').setView([latitude, longitude]);
+        mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true }); 
       }) 
-
     }
 
     mymap.on('click', onMapClick);
