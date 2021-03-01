@@ -18,8 +18,11 @@
     <script src="{% static '/js/script.js' %}" type="text/javascript"></script>
   </head>
   <body>
-    <div class="main-row">
     <div class="header"><h1>GEOCODER</h1></div>
+    <div class="section2">
+      <div id="mapid"></div>
+    </div>
+    <div class="main-row">
     <div class="section1">
         <form class="location" id="search">
           <input class="text-inp"
@@ -49,12 +52,10 @@
           />
         <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input>
         </form>
-        <div id="display-results"></div>
     </div>
+    <div id="display-results"></div>
   </div>
-  <div class="section2">
-    <div id="mapid"></div>
-  </div>
+
   
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
 
@@ -150,25 +151,6 @@
         }) 
     })
 
-    // function callReverse still to be fixed
-
-    // function callReverse(latitude, longitude) {
-    //   let data = new FormData();
-        
-    //     data.append("lat", latitude)
-    //     data.append("lon", longitude)
-    //     data.append("csrfmiddlewaretoken", '{{csrf_token}}')
-        
-    //     axios.post('reverse/', data)
-    //     .then(res => {
-    //       console.log(res)
-    //       var features = res.data.features
-    //       var output = features[0].properties.name
-    //       // Display list with results
-    //       document.getElementById('display-results').innerHTML=output;
-    //   }
-    //     )}
-
 
     function onMapClick(e) {
       var position =  e.latlng;
@@ -177,9 +159,29 @@
       console.log(splitString)
       // get lat and long from click
       var latitude = splitString[0]
-      var longitude = splitString[0]
-      document.getElementById('display-results').innerHTML=splitString;
+      var longitude = splitString[1]
       // callReverse(latitude, longitude)
+
+      let data = new FormData();
+
+      data.append("lat", latitude)
+      data.append("lon", longitude)
+      data.append("csrfmiddlewaretoken", '{{csrf_token}}')
+        
+      axios.post('reverse/', data)
+      .then(res => {
+        console.log(res)
+        var features = res.data.features
+        var output = features[0].properties.name
+        // Display list with results
+        document.getElementById('display-results').innerHTML=output;
+        latitude = features[0].geometry.coordinates[0]
+        longitude = features[0].geometry.coordinates[1]
+        // Add marker to map
+        var marker = L.marker([longitude, latitude]).addTo(mymap);
+        // Set view not working
+        mymap = L.map('mapid').setView([latitude, longitude]);
+      }) 
 
     }
 

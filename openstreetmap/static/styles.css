@@ -1,49 +1,50 @@
 body {
-  background-color: #003049;
+  background-color: #dedfe2;
 }
 
 .main-row {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: left;
+  justify-content: space-between;
 }
 
 h1 {
   display: flex;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 200;
-  justify-content: center;
-  color: white;
-  margin: 3rem;
+  font-size: 21px;
+  font-weight: 400;
+  justify-content: left;
+  color: #c6273f;
+  margin: 1rem;
 }
 
 label {
   color: white;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 .section1 {
   display: flex;
-  justify-content: center;
   align-items: left;
   flex-direction: column;
-  max-width: 70%;
-  padding: 3rem;
+  max-width: 90%;
+  padding: 2rem;
+  padding-top: 2rem;
 }
 
 .text-inp {
   max-width: 42rem;
-  padding: 12px;
-  font-family: 'Montserrat', sans-serif;
+  padding: 6px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .button {
   border: none;
-  background-color: #d62828;
-  font-family: 'Montserrat', sans-serif;
+  background-color: #2f3764;
+  font-family: 'Roboto', sans-serif;
   color: white;
-  padding: 14px 32px;
+  padding: 8px 24px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -51,22 +52,24 @@ label {
 }
 
 .button:hover {
-  background-color: #f77f00;
+  background-color: #9497ae;
   transition: ease-in;
 }
 
 .lat-lon {
   justify-content: space-around;
   padding-bottom: 30px;
+  width: 25rem;
 }
 
 .location {
   justify-content: space-around;
+  width: 25rem;
 }
 
 .lat-lon-inp {
-  padding: 12px;
-  font-family: 'Montserrat', sans-serif;
+  padding: 6px;
+  font-family: 'Roboto', sans-serif;
 }
 
 .space {
@@ -74,16 +77,40 @@ label {
 }
 
 #display-results {
-  font-family: 'Montserrat', sans-serif;
-  color: white;
-}
-
-.section2 {
   display: flex;
-  justify-content: center;
+  align-items: right;
+  justify-content: right;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  font-family: 'Roboto', sans-serif;
+  color: #59636e;
+  max-width: 60rem;
 }
 
 #mapid {
-  height: 25rem;
+  height: 20rem;
   width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+  .main-row {
+    flex-direction: column;
+  }
+
+  .section1 {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    max-width: 90%;
+    padding: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  #display-results {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.5rem;
 }
