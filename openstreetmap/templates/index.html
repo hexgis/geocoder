@@ -76,15 +76,23 @@
     }).addTo(mymap);
 
 
-    function makeUL(json) {
+    function makeUL(json, latitude, longitude) {
       // Create list element
       var list = document.createElement('ul');
 
       for(var i = 0; i < Object.keys(json).length; i++) {
           // Create list item
           var item = document.createElement('li');
-
+          item.id = 'list-item'
+          item.name = i
+          var lat = latitude[i]
+          var lon = longitude[i]
           // Set contents
+
+          item.onclick = function(event) {
+            var listNumber = event.target.name
+            mymap.setView(new L.LatLng(longitude[listNumber], latitude[listNumber]), 5, { animation: true });
+          } 
           item.appendChild(document.createTextNode(Object.values(json)[i]));
 
           // Add to the list
@@ -110,24 +118,27 @@
         axios.post('search/', data)
         .then(res => {
           var names = []
+          var latList = []
+          var lonList = []
           var features = res.data.features
           for(var i=0; i<features.length;i++) {
             var latitude = features[i].geometry.coordinates[0];
             var longitude = features[i].geometry.coordinates[1];
             names.push([features[i].properties.name])
+            latList.push([features[i].geometry.coordinates[0]])
+            lonList.push([features[i].geometry.coordinates[1]])
             var marker = L.marker([longitude, latitude]).addTo(mymap);
-            console.log(names)
             // Center map showing all LatLngs
-            mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true });  
+            // mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true });  
           } 
 
           // Display list with results:
 
           if (document.getElementById('display-results').innerHTML !== "") {
             document.getElementById('display-results').innerHTML = "";
-            document.getElementById('display-results').appendChild(makeUL(names));
+            document.getElementById('display-results').appendChild(makeUL(names, latList, lonList));
           } else {
-            document.getElementById('display-results').appendChild(makeUL(names));
+            document.getElementById('display-results').appendChild(makeUL(names, latList, lonList));
           }
           
         })
