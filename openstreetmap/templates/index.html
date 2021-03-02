@@ -18,43 +18,41 @@
     <script src="{% static '/js/script.js' %}" type="text/javascript"></script>
   </head>
   <body>
-    <div class="header"><h1>GEOCODER</h1></div>
+    <div class="header">
+      <h1>GEOCODER</h1>
+      <form class="location" id="search">
+        <input class="text-inp"
+          id="location"
+          type="text"
+          name="location"
+          value="{{ current_location }}"
+          placeholder="enter a location"
+        />
+        <input class="button" type="submit" value="search"><a href="/search?location={{ current_location }}"></a></input>
+      </form>
+        <div class="space"></div>
+      <form class="lat-lon" id="reverse">
+        <input class="lat-lon-inp"
+          id="lat"
+          type="text"
+          name="lat"
+          value="{{ current_latitude }}"
+          placeholder="enter latitude"
+        />
+        <input class="lat-lon-inp"
+          id="lon"
+          type="text"
+          name="lon"
+          value="{{ current_longitude }}"
+          placeholder="enter longitude"
+        />
+      <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input>
+      </form>
+    </div>
     <div class="section2">
       <div id="mapid"></div>
+      <div id="display-results"></div>
     </div>
-    <div class="main-row">
-    <div class="section1">
-        <form class="location" id="search">
-          <input class="text-inp"
-            id="location"
-            type="text"
-            name="location"
-            value="{{ current_location }}"
-            placeholder="enter a location"
-          />
-          <input class="button" type="submit" value="search"><a href="/search?location={{ current_location }}"></a></input>
-        </form>
-          <div class="space"></div>
-        <form class="lat-lon" id="reverse">
-          <input class="lat-lon-inp"
-            id="lat"
-            type="text"
-            name="lat"
-            value="{{ current_latitude }}"
-            placeholder="enter latitude"
-          />
-          <input class="lat-lon-inp"
-            id="lon"
-            type="text"
-            name="lon"
-            value="{{ current_longitude }}"
-            placeholder="enter longitude"
-          />
-        <input class="button" type="submit" value="reverse"><a href="/reverse?lat={{ current_latitude }}&lon={{ current_longitude }}"></a></input>
-        </form>
-    </div>
-    <div id="display-results"></div>
-  </div>
 
   
   <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>

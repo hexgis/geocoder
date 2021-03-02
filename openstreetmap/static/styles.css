@@ -2,11 +2,10 @@ body {
   background-color: #dedfe2;
 }
 
-.main-row {
+.header {
   display: flex;
   flex-direction: row;
-  align-items: left;
-  justify-content: space-between;
+  align-items: center;
 }
 
 h1 {
@@ -14,7 +13,9 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 21px;
   font-weight: 400;
+  width: 20rem;
   justify-content: left;
+  align-items: center;
   color: #c6273f;
   margin: 1rem;
 }
@@ -24,17 +25,12 @@ label {
   font-family: 'Roboto', sans-serif;
 }
 
-.section1 {
-  display: flex;
-  align-items: left;
-  flex-direction: column;
-  max-width: 90%;
-  padding: 2rem;
-  padding-top: 2rem;
-}
-
 .text-inp {
   max-width: 42rem;
+  padding: 6px;
+  font-family: 'Roboto', sans-serif;
+}
+.lat-lon-inp {
   padding: 6px;
   font-family: 'Roboto', sans-serif;
 }
@@ -58,22 +54,12 @@ label {
 
 .lat-lon {
   justify-content: space-around;
-  padding-bottom: 30px;
   width: 25rem;
 }
 
 .location {
   justify-content: space-around;
   width: 25rem;
-}
-
-.lat-lon-inp {
-  padding: 6px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.space {
-  height: 3rem;
 }
 
 #display-results {
@@ -84,12 +70,26 @@ label {
   padding-top: 2rem;
   font-family: 'Roboto', sans-serif;
   color: #59636e;
-  max-width: 60rem;
+  max-width: 30rem;
+  height: 25rem;
+  position: relative;
+  overflow: hidden;
+  overflow-y: scroll;
+  z-index: +1;
+}
+
+#list-item {
+  color: #59636e;
+  list-style: none;
+  margin-bottom: 1rem;
+  background-color: white;
+  max-width: 30rem;
 }
 
 #mapid {
-  height: 20rem;
+  height: 90%;
   width: 100%;
+  position: absolute;
 }
 
 @media screen and (max-width: 800px) {
