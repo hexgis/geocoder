@@ -7,6 +7,7 @@ body {
   flex-direction: row;
   align-items: center;
   background-color: #2f3764;
+  justify-content: space-between;
 }
 
 h1 {
@@ -14,8 +15,6 @@ h1 {
   font-family: 'Montserrat', sans-serif;
   font-size: 21px;
   font-weight: 400;
-  width: 20rem;
-  justify-content: left;
   align-items: center;
   color: #c6273f;
   margin-left: 1rem;
@@ -72,15 +71,25 @@ label {
 #display-results {
   display: flex;
   flex-direction: column;
-  align-items: right;
-  justify-content: right;
+  align-items: left;
+  justify-content: left;
   font-family: 'Roboto', sans-serif;
   color: #59636e;
   background-color: white;
-  width: 20%;
-  height: 40rem;
+  width: 25%;
+  max-height: 35rem;
+  position: absolute;
   overflow-y: scroll;
-  margin: 1rem 1rem 0 1.5rem;
+  margin: 1rem 1rem 0 1rem;
+  padding: 1rem;
+  border-style: solid;
+  border-radius: 25px;
+  border-color: #2f3764;
+  border-width: 1px;
+}
+
+#display-results:empty {
+  display: none;
 }
 
 #list-item {
@@ -100,7 +109,8 @@ ul {
 
 #mapid {
   height: 40rem;
-  width: 80%;
+  width: 100%;
+  position: relative;
 }
 
 @media screen and (max-width: 800px) {
