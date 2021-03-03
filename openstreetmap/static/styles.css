@@ -1,11 +1,12 @@
 body {
-  background-color: #dedfe2;
+  background-color: white;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: #2f3764;
 }
 
 h1 {
@@ -17,7 +18,7 @@ h1 {
   justify-content: left;
   align-items: center;
   color: #c6273f;
-  margin: 1rem;
+  margin-left: 1rem;
 }
 
 label {
@@ -37,7 +38,7 @@ label {
 
 .button {
   border: none;
-  background-color: #2f3764;
+  background-color: #4c527c;
   font-family: 'Roboto', sans-serif;
   color: white;
   padding: 8px 24px;
@@ -54,28 +55,32 @@ label {
 
 .lat-lon {
   justify-content: space-around;
-  width: 25rem;
+  width: 30rem;
 }
 
 .location {
   justify-content: space-around;
-  width: 25rem;
+  width: 30rem;
+}
+
+.section2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
 
 #display-results {
   display: flex;
+  flex-direction: column;
   align-items: right;
   justify-content: right;
-  padding-right: 1rem;
-  padding-top: 2rem;
   font-family: 'Roboto', sans-serif;
   color: #59636e;
-  max-width: 30rem;
-  height: 25rem;
-  position: relative;
-  overflow: hidden;
+  background-color: white;
+  width: 20%;
+  height: 40rem;
   overflow-y: scroll;
-  z-index: +1;
+  margin: 1rem 1rem 0 1.5rem;
 }
 
 #list-item {
@@ -83,35 +88,20 @@ label {
   list-style: none;
   margin-bottom: 1rem;
   background-color: white;
-  max-width: 30rem;
+  border-bottom: solid 1px #59636e;
+}
+
+ul {
+  width: auto;
+  padding: 0;
+  list-style-type: none;
+  text-align: left;
 }
 
 #mapid {
-  height: 90%;
-  width: 100%;
-  position: absolute;
+  height: 40rem;
+  width: 80%;
 }
 
 @media screen and (max-width: 800px) {
-  .main-row {
-    flex-direction: column;
-  }
-
-  .section1 {
-    display: flex;
-    align-items: left;
-    flex-direction: column;
-    max-width: 90%;
-    padding: 0.5rem;
-    padding-top: 1rem;
-  }
-
-  #display-results {
-    display: flex;
-    align-items: right;
-    justify-content: right;
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
-    padding-top: 0.5rem;
-  }
 }
