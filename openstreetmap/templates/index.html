@@ -62,7 +62,11 @@
   <script>
     let search = document.getElementById('search'); // selecting the form
     let reverse = document.getElementById('reverse'); // selecting the form
-    var mymap = L.map('mapid').setView([51.508, -0.11], 13);
+    var allMarkers = new L.layerGroup();
+    var mymap = L.map('mapid', {
+        center: [-15.47,-47.56],
+        zoom: 5,
+        layers: [allMarkers]})
 
   
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -72,6 +76,12 @@
       accessToken: 'your.mapbox.access.token'
     }).addTo(mymap);
 
+    function removeMarkers() {
+      if (allMarkers !== "") {
+          allMarkers.clearLayers();
+          allMarkers = new L.layerGroup().addTo(mymap);
+        }
+    }
 
     function makeUL(json, latitude, longitude) {
       // Create list element
@@ -118,16 +128,17 @@
           var latList = []
           var lonList = []
           var features = res.data.features
+          removeMarkers();
           for(var i=0; i<features.length;i++) {
             var latitude = features[i].geometry.coordinates[0];
             var longitude = features[i].geometry.coordinates[1];
             names.push([features[i].properties.name])
             latList.push([features[i].geometry.coordinates[0]])
             lonList.push([features[i].geometry.coordinates[1]])
-            var marker = L.marker([longitude, latitude]).addTo(mymap);
-            // Center map showing all LatLngs
-            // mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true });  
+            var marker = L.marker([longitude, latitude]).addTo(allMarkers);
           } 
+
+
 
           // Display list with results:
 
@@ -162,8 +173,9 @@
 
           var latitude = features[0].geometry.coordinates[0]
           var longitude = features[0].geometry.coordinates[1]
-          // Add marker to map
-          var marker = L.marker([longitude, latitude]).addTo(mymap);
+          // Add marker to map and delete previous ones
+          removeMarkers();
+          var marker = L.marker([longitude, latitude]).addTo(allMarkers);
           // Set view not working
           mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true }); 
           
@@ -179,14 +191,14 @@
       // get lat and long from click
       var latitude = splitString[0]
       var longitude = splitString[1]
-      // callReverse(latitude, longitude)
-
       let data = new FormData();
 
       data.append("lat", latitude)
       data.append("lon", longitude)
       data.append("csrfmiddlewaretoken", '{{csrf_token}}')
         
+      // reverse function
+
       axios.post('reverse/', data)
       .then(res => {
         console.log(res)
@@ -196,10 +208,14 @@
         document.getElementById('display-results').innerHTML=output;
         latitude = features[0].geometry.coordinates[0]
         longitude = features[0].geometry.coordinates[1]
-        // Add marker to map
         
-        var marker = L.marker([longitude, latitude]).addTo(mymap);
+        // Add marker to map and delete previous ones
+
+        removeMarkers();
+        var marker = L.marker([longitude, latitude]).addTo(allMarkers);
+
         // Set view not working
+        
         mymap.setView(new L.LatLng(longitude, latitude), 5, { animation: true }); 
       }) 
     }

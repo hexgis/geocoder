@@ -20,6 +20,7 @@ h1 {
   align-items: center;
   color: #c6273f;
   margin-left: 1rem;
+  margin-right: 2rem;
 }
 
 label {
@@ -55,13 +56,13 @@ label {
 }
 
 .lat-lon {
-  justify-content: space-around;
-  width: 30rem;
+  width: 40rem;
+  margin-right: 2rem;
 }
 
 .location {
-  justify-content: space-around;
   width: 30rem;
+  margin-right: 2rem;
 }
 
 .section2 {
