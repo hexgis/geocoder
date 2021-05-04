@@ -1,7 +1,7 @@
 certifi==2019.6.16
 chardet==3.0.4
-Django==2.2.20
-djangorestframework==3.9.4
+Django==2.2.18
+djangorestframework==3.11.2
 idna==2.8
 python-memcached==1.59
 pytz==2019.1
